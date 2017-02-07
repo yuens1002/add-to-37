@@ -1,2 +1,3 @@
 # add-to-37
-Adding Game built with Vue.js
+A demo built with Vue.js fundamental concepts like v-on, v-bind, v-if, watch and computed property in ES6 syntax.
+
