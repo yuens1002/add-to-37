@@ -26,7 +26,7 @@
 							<button @click="value += 5" :disabled="value===targetNum" class="button is-primary">Add 5</button>
 							<button @click="value += 1" :disabled="value===targetNum" class="button is-primary">Add 1</button>
 							<button @click="value += -1" :disabled="value===targetNum" class="button is-primary">Subtract 1</button>
-							<p>hint: {{ resultIs }} <span v-if="value===targetNum">resetting value in {{counter}} secs...</span></p>
+							<p>hint: {{ hintIs }} <span v-if="value===targetNum">resetting value in {{counter}} secs...</span></p>
 						</div>
 					</div>
 				</section>
@@ -41,14 +41,14 @@
 					msg: 'awesome!'
 				},
 				computed: {
-					resultIs() {
+					hintIs() {
 						return this.value !== this.targetNum ? 
 							'you need ' + (this.targetNum - this.value) : 
 							this.msg;
 					}
 				},
 				watch: {
-					resultIs() {
+					hintIs() {
 						//prevents it from triggering again 
 						//when resultIS sets to tihs.msg after 
 						//this.counter is reset to 0
