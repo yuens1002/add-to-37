@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Add to 37</title>
+		<script src="https://npmcdn.com/vue/dist/vue.js"></script>
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.3.1/css/bulma.min.css">
+		<style>
+			.underline {
+				text-decoration: underline;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="root">
+				<section class="hero">
+					<div class="hero-body">
+						<div class="container">
+							<h1 class="title">
+								Add to <span class="underline">37</span>
+							</h1>
+							<h4 class="subtitle">
+								Current Value: {{ value }}
+							</h4>
+							<button @click="value += 5" :disabled="value===targetNum" class="button is-primary">Add 5</button>
+							<button @click="value += 1" :disabled="value===targetNum" class="button is-primary">Add 1</button>
+							<button @click="value += -1" :disabled="value===targetNum" class="button is-primary">Subtract 1</button>
+							<p>hint: {{ resultIs }} <span v-if="value===targetNum">resetting value in {{counter}} secs...</span></p>
+						</div>
+					</div>
+				</section>
+		</div>		
+		<script>
+			new Vue({
+				el: '#root',
+				data: {
+					value: 0,
+					counter: 5,
+					targetNum: 37,
+					msg: 'awesome!'
+				},
+				computed: {
+					resultIs() {
+						return this.value !== this.targetNum ? 
+							'you need ' + (this.targetNum - this.value) : 
+							this.msg;
+					}
+				},
+				watch: {
+					resultIs() {
+						//prevents it from triggering again 
+						//when resultIS sets to tihs.msg after 
+						//this.counter is reset to 0
+						if (this.resultIs !== this.msg) return;
+						this.counter = 5;
+						setTimeout(()=> {
+							this.value = 0;
+						}, 5000);
+						let id = setInterval(()=> {
+							if (this.counter <= 1) {
+								clearInterval(id);
+							} else {
+								this.counter--;
+							}
+						}, 1000);
+					}
+				}
+			});
+		</script>
+	</body>
+</html>
