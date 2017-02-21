@@ -50,9 +50,9 @@
 				watch: {
 					hintIs() {
 						//prevents it from triggering again 
-						//when resultIS sets to tihs.msg after 
-						//this.counter is reset to 0
-						if (this.resultIs !== this.msg) return;
+						//when resultIS sets to this.msg after 
+						//this.counter is reset to 5
+						if (this.hintIs !== this.msg) return;
 						this.counter = 5;
 						setTimeout(()=> {
 							this.value = 0;
